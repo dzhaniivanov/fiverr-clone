@@ -192,7 +192,7 @@ const Message = () => {
         </div>
         <hr />
         <div className="write">
-          <textarea type="text" placeholder="write a message" />
+          <textarea placeholder="write a message" />
           <button>Send</button>
         </div>
       </div>

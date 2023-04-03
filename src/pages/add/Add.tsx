@@ -28,8 +28,8 @@ const Add = () => {
               name=""
               id=""
               placeholder="Brief descriptions to introduce your service to customers"
-              cols="0"
-              rows="16"
+              cols={0}
+              rows={16}
             ></textarea>
             <button>Create</button>
           </div>
@@ -41,8 +41,8 @@ const Add = () => {
               name=""
               id=""
               placeholder="Short description of your service"
-              cols="30"
-              rows="10"
+              cols={30}
+              rows={10}
             ></textarea>
             <label htmlFor="">Delivery Time (e.g. 3 days)</label>
             <input type="number" />

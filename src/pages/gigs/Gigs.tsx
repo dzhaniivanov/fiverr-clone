@@ -4,10 +4,10 @@ import { gigs } from "../../data";
 import GigCard from "../../components/gigCard/GigCard";
 
 const Gigs = () => {
-  const [open, setOpen] = useState(false);
-  const [sort, setSort] = useState("sales ");
+  const [open, setOpen] = useState<boolean>(false);
+  const [sort, setSort] = useState<string>("sales ");
 
-  const reSort = (type) => {
+  const reSort = (type: string) => {
     setSort(type);
     setOpen(false);
   };

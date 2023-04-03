@@ -2,8 +2,8 @@ import { Link, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import "./Navbar.scss";
 const Navbar = () => {
-  const [active, setActive] = useState(false);
-  const [open, setOpen] = useState(false);
+  const [active, setActive] = useState<boolean>(false);
+  const [open, setOpen] = useState<boolean>(false);
 
   const { pathname } = useLocation();
 
