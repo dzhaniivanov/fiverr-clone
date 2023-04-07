@@ -12,12 +12,13 @@ import Footer from "./components/footer/Footer";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 
 import "./app.scss";
+import Register from "./pages/register/Register";
+import Login from "./pages/login/Login";
 
 function App() {
   const Layout = () => {
     return (
       <div className="app">
-
         <Navbar />
         <Outlet />
         <Footer />
@@ -60,6 +61,14 @@ function App() {
         {
           path: "/message/:id",
           element: <Message />,
+        },
+        {
+          path: "/register",
+          element: <Register />,
+        },
+        {
+          path: "/login",
+          element: <Login />,
         },
       ],
     },
