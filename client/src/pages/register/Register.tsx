@@ -1,5 +1,8 @@
 import { ChangeEvent, useState } from "react";
+import newRequest from "../../utils/newRequest";
+import upload from "../../utils/upload";
 import "./Register.scss";
+import { useNavigate } from "react-router-dom";
 
 interface User {
   username: string;
@@ -24,7 +27,7 @@ const Register = () => {
 
   const [file, setFile] = useState(null);
 
-  console.log(user);
+  const navigate = useNavigate();
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -40,9 +43,21 @@ const Register = () => {
     });
   };
 
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+
+    const url = await upload(file);
+    try {
+      await newRequest.post("/auth/register", { ...user, img: url });
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className="register">
-      <form>
+      <form onSubmit={handleSubmit}>
         <div className="left">
           <h1>Create a new account</h1>
           <label htmlFor="">Username</label>
@@ -62,7 +77,7 @@ const Register = () => {
           <label htmlFor="">Password</label>
           <input name="password" type="password" onChange={handleChange} />
           <label htmlFor="">Profile Picture</label>
-          <input type="file" onChange={(e) => setFile(e.target.value[0])} />
+          <input type="file" onChange={(e) => setFile(e.target.files[0])} />
           <label htmlFor="">Country</label>
           <input
             name="country"
