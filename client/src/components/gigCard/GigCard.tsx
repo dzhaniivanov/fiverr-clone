@@ -2,13 +2,15 @@ import "./GigCard.scss";
 import { Link } from "react-router-dom";
 import newRequest from "../../utils/newRequest";
 import { useQuery } from "@tanstack/react-query";
+
+
 const GigCard = ({ item }) => {
   const { isLoading, error, data, refetch } = useQuery({
     queryKey: [`${item.userId}`],
     queryFn: () => newRequest(`/users/${item.userId}`).then((res) => res.data),
   });
   return (
-    <Link to="/gig/123" className="link">
+    <Link to={`/gig/${item._id}`} className="link">
       <div className="gigCard">
         <img src={item.cover} alt="" />
         <div className="info">
