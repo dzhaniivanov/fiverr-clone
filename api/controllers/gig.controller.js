@@ -32,13 +32,31 @@ export const deleteGig = async (req, res, next) => {
 
 export const getGig = async (req, res, next) => {
   try {
+    const gig = await Gig.findById(req.params.id);
+    if (!gig) next(createError(404, "gig not found"));
+
+    res.status(200).send(gig);
   } catch (error) {
     next(error);
   }
 };
 
 export const getGigs = async (req, res, next) => {
+  const q = req.query;
+  const filters = {
+    ...(q.userId && { userId: q.userId }),
+    ...(q.category && { category: q.category }),
+    ...((q.min || q.max) && {
+      price: {
+        ...(q.min && { $gt: q.min }),
+        ...(q.max && { $lt: q.max }),
+      },
+    }),
+    ...(q.search && { title: { $regex: q.search, $options: "i" } }),
+  };
   try {
+    const gigs = await Gig.find(filters).sort({ [q.sort]: -1 });
+    res.status(200).send(gigs);
   } catch (error) {
     next(error);
   }

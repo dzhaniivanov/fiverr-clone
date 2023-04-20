@@ -1,3 +1,6 @@
+import "./app.scss";
+import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
+
 import Navbar from "./components/navbar/Navbar";
 import Home from "./pages/home/Home";
 import Gigs from "./pages/gigs/Gigs";
@@ -8,20 +11,26 @@ import Messages from "./pages/messages/Messages";
 import Message from "./pages/message/Message";
 import MyGigs from "./pages/myGigs/MyGigs";
 import Footer from "./components/footer/Footer";
-
-import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
-
-import "./app.scss";
 import Register from "./pages/register/Register";
 import Login from "./pages/login/Login";
 
+import {
+  QueryClient,
+  QueryClientProvider,
+  useQuery,
+} from "@tanstack/react-query";
+
 function App() {
+  const queryClient = new QueryClient();
+
   const Layout = () => {
     return (
       <div className="app">
-        <Navbar />
-        <Outlet />
-        <Footer />
+        <QueryClientProvider client={queryClient}>
+          <Navbar />
+          <Outlet />
+          <Footer />
+        </QueryClientProvider>
       </div>
     );
   };
