@@ -38,7 +38,7 @@ const Navbar = () => {
     <div className={active || pathname !== "/" ? "navbar active" : "navbar"}>
       <div className="container">
         <div className="logo">
-          <Link to="/" className="link">
+          <Link className="link" to="/">
             <span className="text">fiverr</span>
           </Link>
           <span className="dot">.</span>
@@ -47,78 +47,82 @@ const Navbar = () => {
           <span>Fiverr Business</span>
           <span>Explore</span>
           <span>English</span>
-          <Link to="/login" className="link">Sign in</Link>
           {!currentUser?.isSeller && <span>Become a Seller</span>}
-          {!currentUser && <button>Join</button>}
-          {currentUser && (
+          {currentUser ? (
             <div className="user" onClick={() => setOpen(!open)}>
-              <img
-                src={currentUser.img || "/img/noavatar.jpg"}
-                alt="userImage"
-              />
+              <img src={currentUser.img || "/img/noavatar.jpg"} alt="" />
               <span>{currentUser?.username}</span>
               {open && (
                 <div className="options">
-                  {currentUser?.isSeller && (
+                  {currentUser.isSeller && (
                     <>
-                      <Link to="/mygigs" className="link">
+                      <Link className="link" to="/mygigs">
                         Gigs
                       </Link>
-                      <Link to="/add" className="link">
+                      <Link className="link" to="/add">
                         Add New Gig
                       </Link>
                     </>
                   )}
-                  <Link to="/orders" className="link">
+                  <Link className="link" to="/orders">
                     Orders
                   </Link>
-                  <Link to="/messages" className="link">
+                  <Link className="link" to="/messages">
                     Messages
                   </Link>
-                  <Link to="/" className="link" onClick={handleLogout}>
+                  <Link to="/logout" className="link" onClick={handleLogout}>
                     Logout
                   </Link>
                 </div>
               )}
             </div>
+          ) : (
+            <>
+              <Link to="/login" className="link">
+                Sign in
+              </Link>
+              <Link className="link" to="/register">
+                <button>Join</button>
+              </Link>
+            </>
           )}
         </div>
       </div>
-      {active ||
-        (pathname !== "/" && (
-          <>
-            <hr />
-            <div className="menu">
-              <Link className="link menuLink" to="/">
-                Graphics & Design
-              </Link>
-              <Link className="link menuLink" to="/">
-                Video & Animation
-              </Link>
-              <Link className="link menuLink" to="/">
-                Writing & Translation
-              </Link>
-              <Link className="link menuLink" to="/">
-                AI Services
-              </Link>
-              <Link className="link menuLink" to="/">
-                Digital Marketing
-              </Link>
-              <Link className="link menuLink" to="/">
-                Music & Audio
-              </Link>
-              <Link className="link menuLink" to="/">
-                Programming & Tech
-              </Link>
-              <Link className="link menuLink" to="/">
-                Business
-              </Link>
-              <Link className="link menuLink" to="/">
-                Lifestyle
-              </Link>
-            </div>
-          </>
-        ))}
+      {(active || pathname !== "/") && (
+        <>
+          <hr />
+          <div className="menu">
+            <Link className="link menuLink" to="/">
+              Graphics & Design
+            </Link>
+            <Link className="link menuLink" to="/">
+              Video & Animation
+            </Link>
+            <Link className="link menuLink" to="/">
+              Writing & Translation
+            </Link>
+            <Link className="link menuLink" to="/">
+              AI Services
+            </Link>
+            <Link className="link menuLink" to="/">
+              Digital Marketing
+            </Link>
+            <Link className="link menuLink" to="/">
+              Music & Audio
+            </Link>
+            <Link className="link menuLink" to="/">
+              Programming & Tech
+            </Link>
+            <Link className="link menuLink" to="/">
+              Business
+            </Link>
+            <Link className="link menuLink" to="/">
+              Lifestyle
+            </Link>
+          </div>
+          <hr />
+        </>
+      )}
     </div>
   );
 };
