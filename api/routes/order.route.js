@@ -4,7 +4,7 @@ import { getOrders, createOrder } from "../controllers/order.controller.js";
 
 const router = express.Router();
 
-router.post("/", verifyToken, createOrder);
+router.post("/:id", verifyToken, createOrder);
 router.get("/", verifyToken, getOrders);
 
 export default router;
